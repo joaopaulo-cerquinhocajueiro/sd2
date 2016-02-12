@@ -7,5 +7,5 @@ Email: [joaopaulo@ufpe.br](mailto:joaopaulo@ufpe.br)
 
  - Instale [git](https://git-scm.com/)
  - Execute *git clone https://github.com/joaopaulo-cerquinhocajueiro/sd2.git*
- - Instale [platformio](http://platformio.org/#!/)
- - Instale [atom](https://atom.io/)
+ - Instale [Platformio](http://platformio.org/#!/)
+ - Instale [atom](https://atom.io/) com o pacote [Platformio IDE](http://docs.platformio.org/en/latest/ide/atom.html)

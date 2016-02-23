@@ -67,4 +67,48 @@ git commit -a -m"Incrementado o 1.txt"
 git status
 ```
 
-Percebeu o que faz a opção -a no comando `commit`? Ela faz com que mudanças feitas num arquivo que já estava adiconado sejam acrescentadas ao commit.
+Percebeu o que faz a opção -a no comando `commit`? Ela faz com que mudanças feitas num arquivo que já estava adiconado sejam acrescentadas ao commit Arquivos novos na pasta não são alterados.
+
+## Git branch
+
+Branches (galhos) são versões diferentes do código que tem um HEAD diferente. O branch criado por default no git, no qual se está trabalhando até então é o master. A idéia é que sempre se deixe o master atualizado com a última versão funcional do código e sempre se mexa em algum outro branch.
+
+Os comando são o `branch` para criar um novo branch, o mesmo `checkout` para mudar de branch, `merge` para unir um branch ao outro e `branch -d` para apagar um branch.
+
+```
+git branch v1
+git checkout v1
+edit ...
+git checkout master
+git merge v1
+git branch -d v1
+git log --all --pretty=oneline --abbrev-commit --graph
+```
+
+O problema é que se houver modificações no mesmo ponto do mesmo arquivo, o git não sabe como resolvê-las. Isto gera um conflito que vai aparecer quando tentarmos fazer o merge. Neste caso, o git vai avisar do conflito e gerar um arquivo que tenha a informação dos dois arquivos originais.
+
+Por exemplo, se o arquivo 3.txt no master contiver
+```
+a
+b
+d
+```
+
+E o mesmo arquivo no ramo outro for:
+```
+a
+c
+d
+```
+
+Ao executar o merge (`git merge outro`), nos ficaremos com:
+```
+a
+<<<<<<< HEAD
+b
+=======
+c
+>>>>>>> outro
+d
+```
+mostrando que a linha b está no HEAD do branch atual enquanto que a linha c está no branch `outro`. Resolvendo na mão este arquivo, basta fazer um commit para terminar o merge.

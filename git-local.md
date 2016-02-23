@@ -19,4 +19,52 @@ O git permite mudar o estado do projeto para qualquer uma das versões _commitad
 ```
 git checkout f8295fddab5d28db6658d25d1ed2440d6b46fa56
 ```
+Isto funciona como uma _máquina do tempo_ do projeto. Todas modificações feitas no projeto após este commit são desfeitas, incluindo arquivos deletados ou excluídos (se estiverem no projeto; arquivos presentes na pasta do projeto nãonecessariamente são controlados pelo git).
 
+Muitas vezes não é necessário ou útil mudar para aquela versão do projeto, mas sim comparar o que mudou de uma versão para outra. Para isto é útil o comando `diff`.
+
+```
+git diff f88ce395eb51df446c20fd2e41da93392145fd1d e01e9d89f962164fc5f7fa5751efa4efcbb315b2
+```
+
+O comando `diff` mostra a mudança linha a linha de diferentes versões do mesmo projeto. É muito útil para encontrar bugs novos, pois permite focar no que mudou no código de uma versão sem o bug para uma com.
+
+## Criando um novo projeto.
+A base de dados inicial de um novo projeto com o git é criada pelo comando `init`. Este comando pode ser executado numa pasta vazia ou já com algum material.
+
+Crie uma pasta no seu computador e rode:
+```
+git init
+git log
+```
+
+Para iniciar o controle de versão é necessário dizer ao git que arquivos ele irá controlar. Isto é feito pelo comando `add`. A criação de um commit é feita pelo comando `commit`, que obrigatoriamente irá pedir um comentário. Este comentário pode ser dado na própria linha de comando com a opção `-m"comentário"`.
+
+```
+edit 1.txt
+git add 1.txt
+git commit -m"Commit inicial"
+git log
+```
+O git só salva a modificação que for dita a ele para salvar. Se for feita alteração em um arquivo (no 1.txt, por exemplo), esta alteração será ignorada num próximo commit a menos que mandemos que o git a considere. O comando status indica as modificações feitas.
+
+```
+git status
+edit 1.txt
+git status
+git add 1.txt
+git status
+git commit -m"Alterado o 1.txt"
+git status
+edit 1.txt
+edit 2.txt
+git status
+git add 2.txt
+git status
+git commit -m"Adicionado o 2.txt"
+git status
+git commit -a -m"Incrementado o 1.txt"
+git status
+```
+
+Percebeu o que faz a opção -a no comando `commit`? Ela faz com que mudanças feitas num arquivo que já estava adiconado sejam acrescentadas ao commit.
